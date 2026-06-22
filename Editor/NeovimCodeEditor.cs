@@ -124,8 +124,8 @@ namespace Neovim.Editor
     private static readonly string s_NvimCmdString = string.Join("", new string[] {
       "--cmd \"",
       ":lua _G.nvim_unity_user_supplied_project_root_dir='{projectRootDir}'",
-      "_G.nvim_unity_analyzer_diagnostic_scope='{analyzerDiagnosticScope}'",
-      "_G.nvim_unity_compiler_diagnostic_scope='{compilerDiagnosticScope}'\"" });
+      " _G.nvim_unity_analyzer_diagnostic_scope='{analyzerDiagnosticScope}'",
+      " _G.nvim_unity_compiler_diagnostic_scope='{compilerDiagnosticScope}'\"" });
 
     /// <summary>
     /// List of neovim launch cmds from popular terminal emulators - this is just a hardcoded list so that non-tech-savy
@@ -139,7 +139,7 @@ namespace Neovim.Editor
       ("ptyxis", "--title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("xterm", "-T \"nvimunity-{instanceId}\" -e {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("ghostty", "--title=\"nvimunity-{instanceId}\" --command='{app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
-      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
+      ("wezterm", "start --always-new-process -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
     };
 #elif UNITY_EDITOR_OSX
     {
@@ -150,7 +150,7 @@ namespace Neovim.Editor
       ("alacritty", "--title \"nvimunity-{instanceId}\" --command {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("ghostty", "--title=\"nvimunity-{instanceId}\" --command='{app} {filePath} --listen {serverSocket} " + s_NvimCmdString + "'"),
       ("kitty", "--title \"nvimunity-{instanceId}\" {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
-      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
+      ("wezterm", "start --always-new-process -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
     };
 #else  // UNITY_EDITOR_WIN
     {
@@ -160,7 +160,7 @@ namespace Neovim.Editor
       // characters: https://github.com/microsoft/terminal/issues/13264
       ("wt", "nt {app} {filePath} --listen {serverSocket} " + s_NvimCmdString + "; nt Powershell -File {getProcessPPIDScriptPath}"),
       ("alacritty", "--title \"nvimunity-{instanceId}\" --command {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
-      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString)
+      ("wezterm", "start --always-new-process -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString)
     };
 #endif
 
