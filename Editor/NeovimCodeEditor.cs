@@ -139,6 +139,7 @@ namespace Neovim.Editor
       ("ptyxis", "--title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("xterm", "-T \"nvimunity-{instanceId}\" -e {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("ghostty", "--title=\"nvimunity-{instanceId}\" --command='{app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
+      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
     };
 #elif UNITY_EDITOR_OSX
     {
@@ -149,6 +150,7 @@ namespace Neovim.Editor
       ("alacritty", "--title \"nvimunity-{instanceId}\" --command {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
       ("ghostty", "--title=\"nvimunity-{instanceId}\" --command='{app} {filePath} --listen {serverSocket} " + s_NvimCmdString + "'"),
       ("kitty", "--title \"nvimunity-{instanceId}\" {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
+      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
     };
 #else  // UNITY_EDITOR_WIN
     {
@@ -157,7 +159,8 @@ namespace Neovim.Editor
       // go fucking figure why the most widely used terminal on Windows has not implemented a way to escape its symbolic
       // characters: https://github.com/microsoft/terminal/issues/13264
       ("wt", "nt {app} {filePath} --listen {serverSocket} " + s_NvimCmdString + "; nt Powershell -File {getProcessPPIDScriptPath}"),
-      ("alacritty", "--title \"nvimunity-{instanceId}\" --command {app} {filePath} --listen {serverSocket} " + s_NvimCmdString)
+      ("alacritty", "--title \"nvimunity-{instanceId}\" --command {app} {filePath} --listen {serverSocket} " + s_NvimCmdString),
+      ("wezterm", "start --title \"nvimunity-{instanceId}\" -- {app} {filePath} --listen {serverSocket} " + s_NvimCmdString)
     };
 #endif
 
