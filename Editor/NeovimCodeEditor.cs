@@ -422,19 +422,28 @@ namespace Neovim.Editor
 #if UNITY_EDITOR_LINUX
     private static LinuxDesktopEnvironment DetermineLinuxDesktopEnvironment()
     {
-      string val = Environment.GetEnvironmentVariable("XDG_DATA_DIRS");
-      if (val != null)
+      string desktop = Environment.GetEnvironmentVariable("XDG_CURRENT_DESKTOP");
+      if (desktop != null)
       {
-        if (val.Contains("gnome", StringComparison.OrdinalIgnoreCase))
+          if (desktop.Contains("GNOME", StringComparison.OrdinalIgnoreCase))
+          {
+              return LinuxDesktopEnvironment.GNOME;
+          }
+          if (desktop.Contains("KDE", StringComparison.OrdinalIgnoreCase))
+          {
+              return LinuxDesktopEnvironment.KDE;
+          }
+      }
+
+      string sessionType = Environment.GetEnvironmentVariable("XDG_SESSION_TYPE");
+      if (sessionType != null)
+      {
+        if (sessionType.Contains("x11", StringComparison.OrdinalIgnoreCase))
         {
-          return LinuxDesktopEnvironment.GNOME;
-        }
-        else
-        {
-          return LinuxDesktopEnvironment.OTHER;
+          return LinuxDesktopEnvironment.X11;
         }
       }
-      return LinuxDesktopEnvironment.UNKNOWN;
+      return LinuxDesktopEnvironment.OTHER;
     }
 #endif
 
